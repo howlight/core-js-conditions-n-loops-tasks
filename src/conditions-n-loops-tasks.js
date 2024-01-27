@@ -21,8 +21,11 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number >= 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -38,8 +41,15 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  const numbers = [a, b, c];
+  let maxNumber = numbers[0];
+  for (let i = 0; i < numbers.length; i += 1) {
+    if (numbers[i] > maxNumber) {
+      maxNumber = numbers[i];
+    }
+  }
+  return maxNumber;
 }
 
 /**
@@ -60,8 +70,12 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  const horizontal = queen.x === king.x;
+  const vertical = queen.y === king.y;
+  const diagonal = Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y);
+
+  return horizontal || vertical || diagonal;
 }
 
 /**
@@ -82,8 +96,15 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  let isoscelesTriangle = false;
+  if (a === b || b === c || a === c) {
+    isoscelesTriangle = true;
+  }
+  if (a + b <= c || b + c <= a || a + c <= b) {
+    isoscelesTriangle = false;
+  }
+  return isoscelesTriangle;
 }
 
 /**
@@ -100,8 +121,31 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const romans = [
+    { value: 1000, numeral: 'M' },
+    { value: 900, numeral: 'CM' },
+    { value: 500, numeral: 'D' },
+    { value: 400, numeral: 'CD' },
+    { value: 100, numeral: 'C' },
+    { value: 90, numeral: 'XC' },
+    { value: 50, numeral: 'L' },
+    { value: 40, numeral: 'XL' },
+    { value: 10, numeral: 'X' },
+    { value: 9, numeral: 'IX' },
+    { value: 5, numeral: 'V' },
+    { value: 4, numeral: 'IV' },
+    { value: 1, numeral: 'I' },
+  ];
+  let incomingNum = num;
+  let romanNum = '';
+  for (let i = 0; i < romans.length; i += 1) {
+    while (incomingNum >= romans[i].value) {
+      romanNum += romans[i].numeral;
+      incomingNum -= romans[i].value;
+    }
+  }
+  return romanNum;
 }
 
 /**
